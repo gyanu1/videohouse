@@ -3,15 +3,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	 xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://www.springframework.org/schema/util 
-       http://www.springframework.org/schema/util/spring-util-3.0.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<mvc:annotation-driven />
 	<context:component-scan base-package="cs544.videohouse" />
@@ -39,4 +43,64 @@
 	<!-- <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> 
 		<property name="mappings"> <props> <prop key="/**/*.jsp">viewController</prop> 
 		</props> </property> </bean> <bean id="viewController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/> -->
+
+	<context:annotation-config />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/cs544" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties" ref="hibernateProperties" />
+		<property name="packagesToScan" value="cs544.videohouse.domain" />
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+		id="hibernateProperties">
+		<property name="properties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="connection.pool.size">5</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager"
+		proxy-target-class="true" />
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userService" class="cs544.videohouse.service.UserService">
+		<constructor-arg ref="sessionFactory" />
+		<constructor-arg ref="userDao" />
+	</bean>
+	<bean id="videoService" class="cs544.videohouse.service.VideoService">
+		<constructor-arg ref="sessionFactory" />
+		<constructor-arg ref="videoDao" />
+	</bean>
+	<bean id="categoryService" class="cs544.videohouse.service.CategoryService">
+		<constructor-arg ref="sessionFactory" />
+		<constructor-arg ref="categoryDao" />
+	</bean>
+	<bean id="categoryDao" class="cs544.videohouse.dao.CategoryDAO">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+	<bean id="userDao" class="cs544.videohouse.dao.UserDAO">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+	<bean id="videoDao" class="cs544.videohouse.dao.VideoDAO">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
 </beans>

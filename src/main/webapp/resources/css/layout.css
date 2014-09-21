@@ -48,11 +48,7 @@ and open the template in the editor.
 	min-height: 670;
 	max-width: 450;
 }
-
-.container .row .col-md-5 {
+.container .row .col-md-5{
 	cursor: pointer;
 	cursor: hand;
-}
-.container .row .col-md-5 :hover{
-	background: #F0F0F0;
 }

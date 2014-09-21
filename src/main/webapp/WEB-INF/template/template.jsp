@@ -19,7 +19,6 @@ and open the template in the editor.
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
-<!-- <link rel="stylesheet" type="text/css" href="resources/css/player.css"> -->
 <link rel="stylesheet" type="text/css" href="resources/bootstrap3.2/css/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="resources/js/jquery-2.1.1.min.js"></script>

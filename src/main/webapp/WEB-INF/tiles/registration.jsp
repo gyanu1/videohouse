@@ -4,7 +4,7 @@
     Author     : GMaharjan
 --%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<div style="width: 80%; margin: 0 auto; background: #E8E8E8;">
+<div style="width: 80%; margin: 0 auto; background: #E8E8E8; padding:15 10">
 	<form:form class="form-horizontal" role="form" command="user" action="register" method="post">
 		<div class="form-group">
 			<label for="firstname" class="col-sm-2 control-label">Firstname</label>
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="facebookId" class="col-sm-2 control-label">Facebook_Id</label>
+			<label for="facebookId" class="col-sm-2 control-label">Facebook Id</label>
 			<div class="col-sm-10">
 				<form:password path="facebookId" class="form-control" id="facebookId" value="${user.facebookId}" />
 			</div>

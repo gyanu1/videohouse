@@ -4,7 +4,7 @@
     Author     : GMaharjan
 --%>
 
-<div class="vcenter">
+<div >
 	<ul class="nav nav-list">
 		<!-- <li class="nav-header">Visit</li> -->
 		<li class="active"><a href="login">Login</a></li>

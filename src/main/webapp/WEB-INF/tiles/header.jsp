@@ -5,9 +5,16 @@
 --%>
 
 <div style="margin-top: 3px; margin-bottom: 3px;">
-	<img alt="Video house" src="resources/img/videohouse.jpg">
-	<form class="form-search  pull-right">
-		<input type="text" class="input-medium search-query">
-		<button type="submit" class="btn">Search</button>
-	</form>
+	<div class="col-xs-4 pull-left">
+		<img alt="Video house" src="resources/img/videohouse.jpg">
+	</div>
+
+	<div class="row pull-right">
+		<div class="col-xs-8 ">
+			<input type="text" class="form-control" >
+		</div>
+		<div class="col-xs-4">
+			<input type="button" class="form-control" value="Search">
+		</div>
+	</div>
 </div>

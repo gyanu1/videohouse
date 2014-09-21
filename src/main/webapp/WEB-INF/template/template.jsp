@@ -19,12 +19,13 @@ and open the template in the editor.
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
-<link rel="stylesheet" type="text/css" href="resources/css/player.css">
+<!-- <link rel="stylesheet" type="text/css" href="resources/css/player.css"> -->
 <link rel="stylesheet" type="text/css" href="resources/bootstrap3.2/css/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="resources/js/jquery-2.1.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="resources/bootstrap3.2/js/bootstrap.min.js"></script>
+<script src="resources/js/videohouse.js"></script>
 </head>
 <body class="wrapper">
 	<table class="main">

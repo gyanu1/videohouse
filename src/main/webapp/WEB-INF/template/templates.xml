@@ -27,6 +27,9 @@
 	<definition name="registrationTemplate" extends="baseTemplate">
 		<put-attribute name="content" value="/WEB-INF/tiles/registration.jsp" />
 	</definition>
+	<definition name="searchTemplate" extends="baseTemplate">
+		<put-attribute name="content" value="/WEB-INF/tiles/search.jsp" />
+	</definition>
 
 </tiles-definitions>
 

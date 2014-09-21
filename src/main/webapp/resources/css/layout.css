@@ -7,45 +7,52 @@ and open the template in the editor.
     Created on : Sep 19, 2014, 2:37:35 PM
     Author     : GMaharjan
 */
-
-.wrapper{
-    margin: 0 auto;
-    background: #F8F8F8;
+.wrapper {
+	margin: 0 auto;
+	background: #F8F8F8;
 }
 
-.main{
-    margin: 0 auto;
-    width: 96%;
-    padding-bottom: 3px;
-    padding-top: 3px;
-    background: #ffffff;
+.main {
+	margin: 0 auto;
+	width: 96%;
+	padding-bottom: 3px;
+	padding-top: 3px;
+	background: #ffffff;
 }
 
-.menu{
-  /* //  float: left; */
-}
-
-.content{
-/*  //  float: right; */
-}
-
-.menu-content{
-    width: 100%;
-    height: auto;
-    background: #ccccff;
-}
-
-
-.player{
-	width:800;
-	height:524;
-	background:#D5AEE9;
-	padding:5 10 5 10;
-	border-radius:5;
-}
-
-.content-box{
-	min-height:670;
-	max-width:450;
+.menu {
+	/* //  float: left; */
 	
+}
+
+.content {
+	/*  //  float: right; */
+	
+}
+
+.menu-content {
+	width: 100%;
+	height: auto;
+	background: #ccccff;
+}
+
+.player {
+	width: 800;
+	height: 524;
+	background: #D5AEE9;
+	padding: 5 10 5 10;
+	border-radius: 5;
+}
+
+.content-box {
+	min-height: 670;
+	max-width: 450;
+}
+
+.container .row .col-md-5 {
+	cursor: pointer;
+	cursor: hand;
+}
+.container .row .col-md-5 :hover{
+	background: #F0F0F0;
 }

@@ -5,7 +5,7 @@
 --%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div style="width: 80%; margin: 0 auto; background: #E8E8E8;">
-	<form:form class="form-horizontal" role="form" command="user" action="/register}" method="post">
+	<form:form class="form-horizontal" role="form" command="user" action="register" method="post">
 		<div class="form-group">
 			<label for="firstname" class="col-sm-2 control-label">Firstname</label>
 			<div class="col-sm-10">

@@ -8,6 +8,7 @@ package cs544.videohouse.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -29,12 +30,12 @@ public class UserController {
         return "redirect:/video";
     }
 
-    @RequestMapping("/video")
-    public String redirectVideo() {
+    @RequestMapping(value="/video",method = RequestMethod.GET)
+    public String showVideoPage() {
         System.out.println("redirect to video page");
         return "video";
     }
-
+    
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView redirectRegistration() {
         return new ModelAndView("registration", "command",new User());
@@ -44,6 +45,12 @@ public class UserController {
     public String checkRegistration() {
         System.out.println("redirect to registration page");
         return "redirect:/login";
+    }
+	
+	@RequestMapping(value="/search",method = RequestMethod.POST)
+    public String searchVideo() {
+        System.out.println("redirect to video page");
+        return "search";
     }
 
 }

@@ -3,6 +3,7 @@
     Created on : Sep 19, 2014, 1:51:37 PM
     Author     : GMaharjan
 --%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div style="margin-top: 3px; margin-bottom: 3px;">
 	<div class="col-xs-4 pull-left">
@@ -10,11 +11,13 @@
 	</div>
 
 	<div class="row pull-right">
-		<div class="col-xs-8 ">
-			<input type="text" class="form-control" >
-		</div>
-		<div class="col-xs-4">
-			<input type="button" class="form-control" value="Search">
-		</div>
+		<form action="search" method="post">
+			<div class="col-xs-8 ">
+				<input name="text" class="form-control" />
+			</div>
+			<div class="col-xs-4">
+				<input type="submit" class="form-control" value="Search">
+			</div>
+		</form>
 	</div>
 </div>

@@ -5,11 +5,15 @@
  */
 package cs544.videohouse.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import cs544.videohouse.domain.User;
 
 /**
  *
@@ -47,9 +51,15 @@ public class UserController {
     }
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String checkRegistration() {
+    public String checkRegistration(@Valid User user,BindingResult result) {
+		String view="redirect:/login";
+		if(result.hasErrors()){
+			view= "/register";
+		}else{
+			//save user #bishal;
+		}
         System.out.println("redirect to registration page");
-        return "redirect:/login";
+        return view ;
     }
 	
 	@RequestMapping(value="/search",method = RequestMethod.POST)

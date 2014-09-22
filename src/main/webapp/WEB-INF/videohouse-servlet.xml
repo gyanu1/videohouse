@@ -66,7 +66,7 @@
 		id="hibernateProperties">
 		<property name="properties">
 			<props>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="connection.pool.size">5</prop>
 				<prop key="hibernate.show_sql">true</prop>
@@ -102,5 +102,13 @@
 	<bean id="videoDao" class="cs544.videohouse.dao.VideoDAO">
 		<constructor-arg ref="sessionFactory" />
 	</bean>
+	 <!-- Configure the multipart resolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="100000"/>
+    </bean>
+    
+    <!-- Lets us find resources (.html etc) through the default servlet -->
+    <mvc:default-servlet-handler/> 
 
 </beans>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -43,8 +47,28 @@ public class Video {
     private String keywords;
     @Column(name="thumbnail",columnDefinition="longblob")
     private byte[] thumbnail;
+    @Transient
+    private MultipartFile image;
+    @Transient
+    private MultipartFile file;
     
-    @ManyToOne
+    public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	@ManyToOne
     @JoinColumn(name="user_id")
     private User user;
     @OneToMany(mappedBy="video")

@@ -18,6 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
 
+    @RequestMapping("/")
+    public String redirectRoot() {
+            return "redirect:/login";
+    }
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView redirectlogin() {
         System.out.println("redirect to login page");

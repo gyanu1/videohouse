@@ -11,4 +11,6 @@ public interface IVideoService {
     public Collection<Video> getVideo(String title);
     public Collection<Video> getVideos();
     public void changeDetails (long id,Video video);
+    public void uploadVideo(Video video);
+     public Video getVideo(long id);
 }

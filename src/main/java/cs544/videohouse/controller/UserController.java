@@ -7,13 +7,14 @@ package cs544.videohouse.controller;
 
 import cs544.videohouse.domain.User;
 import cs544.videohouse.domain.Video;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.net.URL;
-import java.net.URLClassLoader;
+import cs544.videohouse.service.VideoService;
+import cs544.videohouse.util.Utility;
+import java.util.List;
 import javax.validation.Valid;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
 
+    @Autowired
+    private VideoService videoService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView redirectlogin() {
         System.out.println("redirect to login page");
@@ -40,9 +44,9 @@ public class UserController {
         return "redirect:/video";
     }
 
-    @RequestMapping(value = "/video", method = RequestMethod.GET)
-    public String showVideoPage() {
-        System.out.println("redirect to video page");
+    @RequestMapping(value = "/video", params = {"id"}, method = RequestMethod.GET)
+    public String showVideoPage(@RequestParam(value = "id") String id, Model model) {
+        model.addAttribute("video", videoService.getVideo(Long.valueOf(id)));
         return "video";
     }
 
@@ -65,7 +69,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String searchVideo() {
+    public String searchVideo(Model model) {
+        List<Video> videoList = videoService.getVideos();
+        model.addAttribute("videoList", videoList);
+        System.out.println("redirect to video page");
+        return "search";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String watchVideo(Model model) {
+        List<Video> videoList = videoService.getVideos();
+        model.addAttribute("videoList", videoList);
         System.out.println("redirect to video page");
         return "search";
     }
@@ -77,47 +91,18 @@ public class UserController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ModelAndView checkUloadVideo(@Valid Video video, BindingResult result, @RequestParam("file") MultipartFile file, @RequestParam("image") MultipartFile image) {
-        if (!file.isEmpty()) {
-            try {
-                 byte[] bytes = file.getBytes();
-                //creating the directory to store file
-               // String rootPath = System.getProperty("catalina.home");
-                ClassLoader c = getClass().getClassLoader();
-                URLClassLoader u = (URLClassLoader) c;
-                URL[] urls = u.getURLs();
-                String path = "";
-                for (URL i : urls) {
-                    if (i.toString().contains("WEB-INF")) {
-                        path = i.toString();
-                        System.out.println("url: " + i);
-                        break;
-                    }
-
-                }
-                String tokens[] = path.split("WEB-INF");
-                path = tokens[0];
-                path = path.replaceFirst("file:", "");
-                File dir = new File(path + File.separator + "resources"+File.separator+"video");
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                //create the file on server
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + video.getTitle());
-
-                BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-                System.out.println("You successfully uploaded " + video.getTitle() + " into " + video.getTitle() + "-uploaded !");
-            } catch (Exception e) {
-                System.out.println("You failed to upload " + video.getTitle() + " => " + e.getMessage());
-            }
-        } else {
-            System.out.println("You failed to upload " + video.getTitle() + " because the file was empty.");
-        }
+        String videoExt = FilenameUtils.getExtension(video.getFile().getOriginalFilename());
+        System.out.println("extension : " + videoExt);
+        video.setType(videoExt);
+        String imageExt = FilenameUtils.getExtension(video.getImage().getOriginalFilename());
+        System.out.println("extension : " + videoExt);
+        video.setType(videoExt);
+        video.setImageType(imageExt);
+        video.setDate(Utility.getCurrentDate());
         if (result.hasErrors()) {
             return new ModelAndView("upload", "command", video);
         } else {
+            videoService.uploadVideo(video);
             // save file;
             System.out.println("save");
             return new ModelAndView("upload", "command", new Video());

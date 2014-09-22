@@ -7,8 +7,7 @@
 package cs544.videohouse.dao;
 
 import cs544.videohouse.domain.Video;
-import java.util.Collection;
-import javax.transaction.Transactional;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
@@ -16,7 +15,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Bishal Timilsina
  */
-@Transactional
+
 public class VideoDAO implements IVideoDAO{
     
     private SessionFactory sf;
@@ -50,16 +49,22 @@ public class VideoDAO implements IVideoDAO{
     }
 
     @Override
-    public Collection<Video> getVideos() {
+    public List<Video> getVideos() {
         System.out.println("VideoDAO: loading all videos...");       
         return sf.getCurrentSession().createQuery("from Video").list();
     }    
 
     @Override
-    public Collection<Video> getVideos(String title) {
+    public List<Video> getVideos(String title) {
         System.out.println("VideoDAO: loading video with title = :title"); 
         Query q=sf.getCurrentSession().createQuery("from Video v where v.title= :email");
         q.setParameter("title", title);
         return q.list();
+    }
+
+    @Override
+    public Video getVideo(long id) {
+         System.out.println("VideoDAO: loading video with id = :"+id);
+        return (Video) sf.getCurrentSession().get(Video.class, id);
     }
 }

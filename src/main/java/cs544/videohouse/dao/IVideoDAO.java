@@ -7,7 +7,7 @@
 package cs544.videohouse.dao;
 
 import cs544.videohouse.domain.Video;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -18,6 +18,7 @@ public interface IVideoDAO {
    public void updateVideo(Video usr);
    public Video loadVideo(long id);
    public void removeVideo(Video usr);
-   public Collection<Video> getVideos();
-   public Collection<Video> getVideos(String title);
+   public List<Video> getVideos();
+   public List<Video> getVideos(String title);
+    public Video getVideo(long id);
 }

@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -30,7 +31,9 @@ public class User {
     private String firstName;
     private String lastName;
     @Column(unique = true)
-    private String email;    
+    @NotEmpty
+    private String email;  
+    @NotEmpty
     private String password;    
     private String facebookId;
     

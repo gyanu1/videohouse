@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,15 +34,25 @@ public class UserController {
     private VideoService videoService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView redirectlogin() {
+    public String redirectlogin(Model model) {
         System.out.println("redirect to login page");
-        return new ModelAndView("login", "command", new User());
+        model.addAttribute("user", new User());
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String checkUserLogin() {
-        System.out.println("redirect to login page");
-        return "redirect:/video";
+    public String checkUserLogin(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
+        System.out.println(result.toString());
+        if (result.hasErrors()) {
+
+            // model.addAttribute("user", user);
+            return "login";
+        } else {
+            //check credentials
+            System.out.println("redirect to login page");
+            return "redirect:/video";
+        }
+
     }
 
     @RequestMapping(value = "/video", params = {"id"}, method = RequestMethod.GET)

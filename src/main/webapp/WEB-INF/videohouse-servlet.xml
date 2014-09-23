@@ -117,5 +117,10 @@
     
     <!-- Lets us find resources (.html etc) through the default servlet -->
     <mvc:default-servlet-handler/> 
+      <!-- enable custom validation messages -->
+    <bean id="messageSource1" 
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />        
+    </bean>
 
 </beans>

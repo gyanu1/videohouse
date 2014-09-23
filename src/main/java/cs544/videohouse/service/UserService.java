@@ -16,8 +16,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User createUser(String fName, String lName, String email) {     
-        User user = new User(fName,lName,email);        
+    public User createUser(User user) {            
         userDAO.saveUser(user);        
         return user;
     }

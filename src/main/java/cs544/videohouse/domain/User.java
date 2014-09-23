@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -27,10 +29,15 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
     @Column(unique = true)
+    @NotEmpty
+    @Email
     private String email;    
+    @NotEmpty
     private String password;    
     private String facebookId;
     
@@ -50,7 +57,7 @@ public class User {
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.email = email;        
     }
 
     public User(String firstName, String lastName, String email, String facebookId) {

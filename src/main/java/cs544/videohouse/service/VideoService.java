@@ -96,4 +96,10 @@ public class VideoService implements IVideoService {
 	public void saveVideo(Video video) {
 		videoDAO.updateVideo(video);
 	}
+        
+        @Override
+	@Transactional
+        public List<Video> getVideosForSearch(String query){
+            return videoDAO.getVideosForSearch(query);
+        }
 }

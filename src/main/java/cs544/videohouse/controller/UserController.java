@@ -103,11 +103,19 @@ public class UserController {
         return "video";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String searchVideo(Model model) {
-        List<Video> videoList = videoService.getVideos();
+    @RequestMapping(value = "/search", params = {"query"}, method = RequestMethod.POST)
+    public String searchVideo(@RequestParam(value = "query") String search, Model model) {
+        List<Video> videoList = null;
+        System.out.println("search : "+search);
+        if (search.isEmpty()) {
+            videoList = videoService.getVideos();
+        } else {
+            videoList = videoService.getVideosForSearch(search);
+        }
+
         model.addAttribute("videoList", videoList);
-        System.out.println("redirect to video page");
+        model.addAttribute("query", search);
+        System.out.println("redirect to search page");
         return "search";
     }
 
@@ -115,7 +123,7 @@ public class UserController {
     public String watchVideo(Model model) {
         List<Video> videoList = videoService.getVideos();
         model.addAttribute("videoList", videoList);
-        System.out.println("redirect to video page");
+        System.out.println("redirect to search page");
         return "search";
     }
 }

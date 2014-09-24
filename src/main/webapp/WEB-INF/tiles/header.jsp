@@ -13,7 +13,7 @@
 	<div class="row pull-right">
 		<form action="search" method="post">
 			<div class="col-xs-8 ">
-				<input name="text" class="form-control" />
+                            <input name="query" class="form-control" value="${query}" />
 			</div>
 			<div class="col-xs-4">
 				<input type="submit" class="form-control" value="Search">

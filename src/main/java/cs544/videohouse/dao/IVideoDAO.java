@@ -21,4 +21,6 @@ public interface IVideoDAO {
    public List<Video> getVideos();
    public List<Video> getVideos(String title);
     public Video getVideo(long id);
+
+    public List<Video> getVideosForSearch(String query);
 }

@@ -8,7 +8,10 @@ import java.util.Date;
 
 public interface IVideoService {
     public Video createVideo(String title, String filename, String type, String path, Date date, Date duration, byte[] thumbnail, User user, Category category);
+    public void saveVideo(Video video);
     public Collection<Video> getVideo(String title);
     public Collection<Video> getVideos();
     public void changeDetails (long id,Video video);
+    public void uploadVideo(Video video);
+     public Video getVideo(long id);
 }

@@ -8,16 +8,10 @@
 <tiles-definitions>
 	<definition name="baseTemplate" template="/WEB-INF/template/template.jsp">
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
-		<!--<put-attribute name="body" value="/WEB-INF/tiles/body.jsp" /> -->
 		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp" />
 		<put-attribute name="content" value=" " />
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
 	</definition>
-	<!-- <definition name="defaultTemplate" extends="baseTemplate"> <put-attribute 
-		name="header" value="/WEB-INF/tiles/header.jsp" /> <put-attribute name="body" 
-		value="/WEB-INF/tiles/body.jsp" /> <put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp" 
-		/> <put-attribute name="content" value=" " /> <put-attribute name="footer" 
-		value="/WEB-INF/tiles/footer.jsp" /> </definition> -->
 	<definition name="videoTemplate" extends="baseTemplate">
 		<put-attribute name="content" value="/WEB-INF/tiles/content.jsp" />
 	</definition>
@@ -30,7 +24,9 @@
 	<definition name="searchTemplate" extends="baseTemplate">
 		<put-attribute name="content" value="/WEB-INF/tiles/search.jsp" />
 	</definition>
-
+	<definition name="uploadTemplate" extends="baseTemplate">
+		<put-attribute name="content" value="/WEB-INF/tiles/upload.jsp" />
+	</definition>
 </tiles-definitions>
 
 

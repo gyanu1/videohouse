@@ -9,8 +9,8 @@
 		<!-- <li class="nav-header">Visit</li> -->
 		<li class="active"><a href="login">Login</a></li>
 		<li><a href="register">Registration</a></li>
-		<li><a href="video">Watch Video</a></li>
-		<li><a href="#">Upload Video</a></li>
+		<li><a href="search">Watch Video</a></li>
+		<li><a href="upload">Upload Video</a></li>
 	</ul>
 	<ul class="nav nav-list">
 		<li class="nav-header">Channels</li>

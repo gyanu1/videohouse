@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	 xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
        http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/aop 
@@ -17,63 +17,71 @@
        http://www.springframework.org/schema/tx 
        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<mvc:annotation-driven />
-	<context:component-scan base-package="cs544.videohouse" />
+    <mvc:annotation-driven />
+    <context:component-scan base-package="cs544.videohouse" />
+    <context:annotation-config />
 
-	<!-- Used to serve static resources like css, images and javascript files -->
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/template/templates.xml</value>
-			</list>
-		</property>
-	</bean>
-	<!--<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/> -->
+    <!-- Used to serve static resources like css, images and javascript files -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <bean id="tilesConfigurer"
+              class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/template/templates.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/> -->
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- <property name="viewClass" value="org.springbyexample.web.servlet.view.tiles3.DynamicTilesView" 
-			/> -->
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- <property name="viewClass" value="org.springbyexample.web.servlet.view.tiles3.DynamicTilesView" 
+        /> -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
 
-	<!-- <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> 
-		<property name="mappings"> <props> <prop key="/**/*.jsp">viewController</prop> 
-		</props> </property> </bean> <bean id="viewController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/> -->
+    <!-- <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> 
+    <property name="mappings"> <props> <prop key="/**/*.jsp">viewController</prop> 
+    </props> </property> </bean> <bean id="viewController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/> -->
 
-	<context:annotation-config />
-	<aop:aspectj-autoproxy proxy-target-class="true" />
+    <context:annotation-config />
+    <aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/cs544" />
-		<property name="username" value="root" />
-		<property name="password" value="" />
-	</bean>
+    <bean id="dataSource"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/videohouse" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="hibernateProperties" ref="hibernateProperties" />
-		<property name="packagesToScan" value="cs544.videohouse.domain" />
-	</bean>
+    <bean id="sessionFactory"
+              class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties" ref="hibernateProperties" />
+        <property name="packagesToScan" value="cs544.videohouse.domain" />
+    </bean>
 
-	<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"
-		id="hibernateProperties">
-		<property name="properties">
-			<props>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="connection.pool.size">5</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property>
+	       
+    <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+              id="hibernateProperties">
+        <property name="properties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="connection.pool.size">5</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- c3p0 connection pool-->
+                <prop key="hibernate.c3p0.min_size">5</prop>
+                <prop key="hibernate.c3p0.max_size">20</prop>
+                <prop key="hibernate.c3p0.timeout">300</prop>
+                <prop key="hibernate.c3p0.max_statements">50</prop>
+                <prop key="hibernate.c3p0.idle_test_period">3000</prop>
+            </props>
+        </property>
+    </bean>
 
-	</bean>
 
 	<tx:annotation-driven transaction-manager="txManager"
 		proxy-target-class="true" />
@@ -86,7 +94,7 @@
 		<constructor-arg ref="userDao" />
 	</bean>
 	<bean id="videoService" class="cs544.videohouse.service.VideoService">
-		<constructor-arg ref="sessionFactory" />
+		<!--<constructor-arg ref="sessionFactory" />-->
 		<constructor-arg ref="videoDao" />
 	</bean>
 	<bean id="categoryService" class="cs544.videohouse.service.CategoryService">
@@ -103,10 +111,18 @@
 		<constructor-arg ref="sessionFactory" />
 	</bean>
           <!-- enable custom validation messages -->
-<!--    <bean id="messageSource1" 
+    <bean id="messageSource1" 
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages" />        
-    </bean>-->
-
+    </bean>
+        
+    <!-- Configure the multipart resolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="20000000"/>
+    </bean>
+    
+    <!-- Lets us find resources (.html etc) through the default servlet -->
+    <mvc:default-servlet-handler/> 
 
 </beans>

@@ -8,47 +8,57 @@ and open the template in the editor.
     Author     : GMaharjan
 */
 .wrapper {
-	margin: 0 auto;
-	background: #F8F8F8;
+    margin: 0 auto;
+    background: #F8F8F8;
 }
 
 .main {
-	margin: 0 auto;
-	width: 96%;
-	padding-bottom: 3px;
-	padding-top: 3px;
-	background: #ffffff;
+    margin: 0 auto;
+    width: 96%;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    background: #ffffff;
 }
 
 .menu {
-	/* //  float: left; */
-	
+    /* //  float: left; */
+
 }
 
 .content {
-	/*  //  float: right; */
-	
+    /*  //  float: right; */
+
 }
 
 .menu-content {
-	width: 100%;
-	height: auto;
-	background: #ccccff;
+    width: 100%;
+    height: auto;
+    background: #ccccff;
 }
 
 .player {
-	width: 800;
-	height: 524;
-	background: #D5AEE9;
-	padding: 5 10 5 10;
-	border-radius: 5;
+    width: 800px;
+    height: 524px;
+    background: #D5AEE9;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
 }
 
 .content-box {
-	min-height: 670;
-	max-width: 450;
+    min-height: 670px;
+    max-width: 450px;
 }
 .container .row .col-md-5{
-	cursor: pointer;
-	cursor: hand;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.video-block{
+    width:470px;
+/*    height:245px;*/
+    padding:5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    float:left;
 }

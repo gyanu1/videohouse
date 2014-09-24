@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cs544.videohouse.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -26,40 +29,62 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Video {
+
     @Id
     @GeneratedValue
+    //also video file name
     private Long id;
     private String title;
-    private String filename;
+    private String imageType;
     private String type;
     private String path;
     @Temporal(TemporalType.DATE)
     private Date date;
     private int viewCount;
     private int likeCount;
-    private int dislikeCount;            
+    private int dislikeCount;
     @Temporal(TemporalType.TIME)
     private Date duration;
     private String keywords;
-    @Column(name="thumbnail",columnDefinition="longblob")
+    @Column(name = "thumbnail", columnDefinition = "longblob")
     private byte[] thumbnail;
-    
+    @Transient
+    private MultipartFile image;
+    @Transient
+    private MultipartFile file;
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy="video")
-    private List<Comment> comments=new ArrayList<Comment>();
+    @OneToMany(mappedBy = "video")
+    private List<Comment> comments = new ArrayList<Comment>();
     @ManyToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Video() {
-        
+
     }
 
     public Video(String title, String filename, String type, String path, Date date, Date duration, byte[] thumbnail, User user, Category category) {
         this.title = title;
-        this.filename = filename;
+        this.imageType = filename;
         this.type = type;
         this.path = path;
         this.date = date;
@@ -85,12 +110,12 @@ public class Video {
         this.title = title;
     }
 
-    public String getFilename() {
-        return filename;
+    public String getImageType() {
+        return imageType;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
     public String getType() {
@@ -188,20 +213,20 @@ public class Video {
     public void setCategory(Category category) {
         this.category = category;
     }
-    
+
     public void addComment(Comment comment) {
         comments.add(comment);
     }
 
-     public void removeComment(Comment comment) {
+    public void removeComment(Comment comment) {
         Iterator<Comment> i = comments.iterator();
         while (i.hasNext()) {
-           Comment c = i.next();
-           if(c==comment){
-              i.remove();
-              break;
-           }
+            Comment c = i.next();
+            if (c == comment) {
+                i.remove();
+                break;
+            }
         }
     }
-        
+
 }

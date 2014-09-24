@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('div .col-md-5').click(function() {
+	$('div .video-block').click(function() {
 	/*	$.ajax({
 			type : "POST",
 			url : "play",

@@ -20,6 +20,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -47,8 +48,8 @@ public class VideoController {
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String checkUploadVideo(@Validated Video video, BindingResult result) {
-        String view="upload";
+    public String checkUploadVideo(@Validated Video video, BindingResult result, final RedirectAttributes redirectAttributes) {
+        String view = "upload";
         String videoExt = FilenameUtils.getExtension(video.getFile().getOriginalFilename());
         System.out.println("extension : " + videoExt);
         video.setType(videoExt);
@@ -63,9 +64,10 @@ public class VideoController {
             return view;
         } else {
             videoService.uploadVideo(video);
+            redirectAttributes.addFlashAttribute("successMessage", video.getTitle() + " video successfully uploaded.");
             // save file;
             System.out.println("save");
-            view="redirect:/upload"+"#"+video.getTitle()+"#"+video.getId();
+            view = "redirect:/upload" + "#" + video.getTitle() + "#" + video.getId();
             return view;
         }
     }

@@ -6,15 +6,19 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div style="width:98%;margin:0 auto;background: #E8E8E8; ">
+
     <form:form class="form-horizontal" role="form" commandName="user" action="login" method="post">
+        <c:if test="${not empty registerMessage}">
+            <p class="alert alert-success" role="alert">${registerMessage}</p>
+        </c:if>
         <div class="form-group">
             <label for="email" class="col-sm-2 control-label">Email</label>
             <div class="row">
                 <div class="col-sm-6">
                     <form:input path="email" class="form-control" id="email" value="${user.email}" />
-                  
+
                 </div>
-                  <form:errors path="email" cssClass="alert alert-danger" />
+                <form:errors path="email" cssClass="alert alert-danger" />
             </div>
         </div>
         <div class="form-group">

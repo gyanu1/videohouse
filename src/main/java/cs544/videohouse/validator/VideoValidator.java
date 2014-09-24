@@ -29,7 +29,7 @@ public class VideoValidator implements Validator {
         Video video = (Video) target;
         if (!video.getImage().isEmpty()) {
             String imageExt = FilenameUtils.getExtension(video.getImage().getOriginalFilename());
-            if (!"png".equals(imageExt) && !"jpg".equals(imageExt) && !"jpeg".equals(imageExt) && !"bmp".equals(imageExt)) {
+            if (!"png".equalsIgnoreCase(imageExt) && !"jpg".equalsIgnoreCase(imageExt) && !"jpeg".equalsIgnoreCase(imageExt) && !"bmp".equalsIgnoreCase(imageExt)) {
                  errors.rejectValue("image", "image.required", "image should have proper format");
             }
         }else{
@@ -38,7 +38,7 @@ public class VideoValidator implements Validator {
 
         if (!video.getFile().isEmpty()) {
             String videoExt = FilenameUtils.getExtension(video.getFile().getOriginalFilename());
-            if (!"mp4".equals(videoExt) && !"ogg".equals(videoExt) && !"ogv".equals(videoExt) && !"webM".equals(videoExt)) {
+            if (!"mp4".equalsIgnoreCase(videoExt) && !"ogg".equalsIgnoreCase(videoExt) && !"ogv".equalsIgnoreCase(videoExt) && !"webM".equalsIgnoreCase(videoExt)) {
                 errors.rejectValue("file", "video.required", "video should be proper format");
             }
             long bytes = video.getFile().getSize();

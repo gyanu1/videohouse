@@ -12,7 +12,7 @@
                             <div class="col-sm-6">
                                     <form:input path="firstName" class="form-control" id="firstName" value="${user.firstName}" />                                                                                               
                             </div>     
-                             <form:errors path="firstName" cssclass="alert alert-danger"/>
+                             <form:errors path="firstName" cssClass="alert alert-danger"/>
                          </div>
 		</div>
 		<div class="form-group">
@@ -21,7 +21,7 @@
                             <div class="col-sm-6">
 				<form:input path="lastName" class="form-control" id="lastName" value="${user.lastName}" />                                                               
                             </div>
-                            <form:errors path="lastName" cssclass="alert alert-danger"/>
+                            <form:errors path="lastName" cssClass="alert alert-danger"/>
                         </div>			
 		</div>
 		<div class="form-group">
@@ -30,7 +30,7 @@
                             <div class="col-sm-6">
                                     <form:input path="email" class="form-control" id="email" value="${user.email}" />                                                                
                             </div>
-                            <form:errors path="email" cssclass="alert alert-danger"/>
+                            <form:errors path="email" cssClass="alert alert-danger"/>
                         </div>
 		</div>
 		<div class="form-group">
@@ -39,7 +39,7 @@
                             <div class="col-sm-6">
 				<form:password path="password" class="form-control" id="password" value="${user.password}" />                                                                
                             </div>
-                            <form:errors path="password" cssclass="alert alert-danger"/>  
+                            <form:errors path="password" cssClass="alert alert-danger"/>  
                         </div>                        
 		</div>                
 		<div class="form-group">

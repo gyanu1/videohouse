@@ -8,4 +8,9 @@
             </a>
         </div>
     </c:forEach>
+    <div class="col-xs-4 pull-center">
+    <label for="name" class="col-xs-2 control-label"><%= cs544.videohouse.util.Welcome.recentUpload %>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="video?id=<%= cs544.videohouse.util.Welcome.rId %>">Checkout</a>       
+    </label>
+    </div>
 </div>

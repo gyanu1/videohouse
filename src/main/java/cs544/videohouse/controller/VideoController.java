@@ -48,7 +48,7 @@ public class VideoController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String checkUploadVideo(@Validated Video video, BindingResult result) {
-        
+        String view="upload";
         String videoExt = FilenameUtils.getExtension(video.getFile().getOriginalFilename());
         System.out.println("extension : " + videoExt);
         video.setType(videoExt);
@@ -60,12 +60,13 @@ public class VideoController {
         System.out.println(result.toString());
         if (result.hasErrors()) {
             //  return new ModelAndView("upload", "command", video);
-            return "upload";
+            return view;
         } else {
             videoService.uploadVideo(video);
             // save file;
             System.out.println("save");
-            return "redirect:/upload";
+            view="redirect:/upload"+"#"+video.getTitle()+"#"+video.getId();
+            return view;
         }
     }
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -82,7 +83,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String checkRegistration(@Valid User user, BindingResult result, Model model) {
+    public String checkRegistration(@Valid User user, BindingResult result, Model model,final RedirectAttributes redirectAttributes) {
         String view = "registration";
         if (result.hasErrors()) {
             System.out.println("redirect to registration page (meth:POST)");
@@ -92,7 +93,8 @@ public class UserController {
             user.setPassword(password);
             userService.createUser(user);
             System.out.println("redirect to login page");
-            model.addAttribute("user", user);
+            //model.addAttribute("user", user);
+            redirectAttributes.addFlashAttribute("registerMessage", user.getFirstName()+" "+user.getLastName()+" successfully registered.");
             view = "redirect:/login";
             return view;
         }

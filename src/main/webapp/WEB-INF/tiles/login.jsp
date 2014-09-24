@@ -5,31 +5,35 @@
 --%>
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<div style="width:80%;margin:0 auto;background: #E8E8E8; ">
-    <form:form class="form-horizontal" role="form" command="user" action="login" method="post" modelAttribute="user">
-		<div class="form-group">
-			<label for="email" class="col-sm-2 control-label">Email</label>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                    <form:input path="email" class="form-control" id="email" value="${user.email}" />
-                            </div>
-                        <form:errors path="email" cssClass="alert alert-danger" />
-                        </div>
-		</div>
-		<div class="form-group">
-			<label for="password" class="col-sm-2 control-label">Password</label>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                    <form:password path="password" class="form-control" id="password" value="${Password}" />
-                            </div>
-                            <form:errors path="password" cssClass="alert alert-danger" /> 
-                        </div>
-		</div>
+<div style="width:98%;margin:0 auto;background: #E8E8E8; ">
+    <form:form class="form-horizontal" role="form" commandName="user" action="login" method="post">
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">Email</label>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form:input path="email" class="form-control" id="email" value="${user.email}" />
+                  
+                </div>
+                  <form:errors path="email" cssClass="alert alert-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">Password</label>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form:password path="password" class="form-control" id="password" value="${Password}" />
 
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-6">
-				<input type="submit" class="btn btn-default" value="Sign in" />
-			</div>
-		</div>
-	</form:form>
+                </div>
+                <form:errors path="email" cssClass="alert alert-danger" /> 
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-default" value="Sign in" />
+            </div>
+        </div>
+    </form:form>
 </div>

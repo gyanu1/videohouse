@@ -46,7 +46,7 @@ and open the template in the editor.
 
 .content-box {
     min-height: 670px;
-    max-width: 450px;
+    min-width: 450px;
 }
 .container .row .col-md-5{
     cursor: pointer;
@@ -62,3 +62,4 @@ and open the template in the editor.
     overflow: hidden;
     float:left;
 }
+

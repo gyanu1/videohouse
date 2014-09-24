@@ -55,67 +55,75 @@
         <property name="username" value="root" />
         <property name="password" value="" />
     </bean>
+    
+<!--    <bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost/videohouse" />
+        <property name="user" value="root" />
+        <property name="password" value="" /> 
+
+            these are C3P0 properties 
+           <property name="acquireIncrement" value="1" />
+           <property name="minPoolSize" value="3" />
+           <property name="maxPoolSize" value="6" />
+           <property name="maxIdleTime" value="3000" />
+    </bean>-->
 
     <bean id="sessionFactory"
-              class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="hibernateProperties" ref="hibernateProperties" />
         <property name="packagesToScan" value="cs544.videohouse.domain" />
     </bean>
 
-	       
     <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"
-              id="hibernateProperties">
+          id="hibernateProperties">
         <property name="properties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="connection.pool.size">5</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <!--                <prop key="hibernate.auto_close_session">true</prop>-->
                 <!-- c3p0 connection pool-->
-                <prop key="hibernate.c3p0.min_size">5</prop>
-                <prop key="hibernate.c3p0.max_size">20</prop>
+                <!--                 <prop key= "hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</prop> 
+                <prop key="hibernate.c3p0.min_size">3</prop>
+                <prop key="hibernate.c3p0.max_size">6</prop>
                 <prop key="hibernate.c3p0.timeout">300</prop>
                 <prop key="hibernate.c3p0.max_statements">50</prop>
-                <prop key="hibernate.c3p0.idle_test_period">3000</prop>
+                <prop key="hibernate.c3p0.idle_test_period">3000</prop>-->
             </props>
         </property>
+
     </bean>
 
-
-	<tx:annotation-driven transaction-manager="txManager"
-		proxy-target-class="true" />
-	<bean id="txManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean id="userService" class="cs544.videohouse.service.UserService">
-		<constructor-arg ref="sessionFactory" />
-		<constructor-arg ref="userDao" />
-	</bean>
-	<bean id="videoService" class="cs544.videohouse.service.VideoService">
-		<!--<constructor-arg ref="sessionFactory" />-->
-		<constructor-arg ref="videoDao" />
-	</bean>
-	<bean id="categoryService" class="cs544.videohouse.service.CategoryService">
-		<constructor-arg ref="sessionFactory" />
-		<constructor-arg ref="categoryDao" />
-	</bean>
-	<bean id="categoryDao" class="cs544.videohouse.dao.CategoryDAO">
-		<constructor-arg ref="sessionFactory" />
-	</bean>
-	<bean id="userDao" class="cs544.videohouse.dao.UserDAO">
-		<constructor-arg ref="sessionFactory" />
-	</bean>
-	<bean id="videoDao" class="cs544.videohouse.dao.VideoDAO">
-		<constructor-arg ref="sessionFactory" />
-	</bean>
-          <!-- enable custom validation messages -->
-    <bean id="messageSource1" 
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages" />        
+    <tx:annotation-driven transaction-manager="txManager"
+                          proxy-target-class="true" />
+    <bean id="txManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-        
+    <bean id="userService" class="cs544.videohouse.service.UserService">
+        <constructor-arg ref="sessionFactory" />
+        <constructor-arg ref="userDao" />
+    </bean>
+    <bean id="videoService" class="cs544.videohouse.service.VideoService">
+        <!--		<constructor-arg ref="sessionFactory" />-->
+        <constructor-arg ref="videoDao" />
+    </bean>
+    <bean id="categoryService" class="cs544.videohouse.service.CategoryService">
+        <constructor-arg ref="sessionFactory" />
+        <constructor-arg ref="categoryDao" />
+    </bean>
+    <bean id="categoryDao" class="cs544.videohouse.dao.CategoryDAO">
+        <constructor-arg ref="sessionFactory" />
+    </bean>
+    <bean id="userDao" class="cs544.videohouse.dao.UserDAO">
+        <constructor-arg ref="sessionFactory" />
+    </bean>
+    <bean id="videoDao" class="cs544.videohouse.dao.VideoDAO">
+        <constructor-arg ref="sessionFactory" />
+    </bean>
     <!-- Configure the multipart resolver -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- one of the properties available; the maximum file size in bytes -->
@@ -124,5 +132,10 @@
     
     <!-- Lets us find resources (.html etc) through the default servlet -->
     <mvc:default-servlet-handler/> 
+    <!-- enable custom validation messages -->
+    <bean id="messageSource1" 
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />        
+    </bean>
 
 </beans>

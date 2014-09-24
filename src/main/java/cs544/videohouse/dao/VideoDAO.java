@@ -26,8 +26,9 @@ public class VideoDAO implements IVideoDAO{
         
     @Override
     public void saveVideo(Video vid) {
-        System.out.println("VideoDAO: saving video with id =" + vid.getId());       
+        System.out.println("before saving video with id =" + vid.getId());       
         sf.getCurrentSession().persist(vid);
+         System.out.println("after saving video with id =" + vid.getId());
     }
 
     @Override

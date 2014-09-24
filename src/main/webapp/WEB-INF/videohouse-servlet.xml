@@ -137,4 +137,7 @@
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages" />        
     </bean>
+    
+    <bean id="welcome" class="cs544.videohouse.util.Welcome" />
+    
 </beans>

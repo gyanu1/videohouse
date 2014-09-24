@@ -11,6 +11,12 @@
         <img alt="Video house" src="resources/img/videohouse.jpg">
 
     </div>
+    <p>
+        <a href="video?id=<%= cs544.videohouse.util.Welcome.rId%>">
+            <label for="name" class="col-xs-2 control-label">
+                <%= cs544.videohouse.util.Welcome.recentUpload%>               
+            </label>
+        </a> </p>
 
     <div class="row pull-right">
         <c:if test="${not empty loginUser}">

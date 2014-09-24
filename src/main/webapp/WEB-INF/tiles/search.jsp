@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="container">
     <c:forEach items="${videoList}" var="video" varStatus="loop"> 
         <div class="video-block">
@@ -7,5 +8,5 @@
                 <p>${video.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${video.viewCount}&nbsp;views</p>
             </a>
         </div>
-    </c:forEach>
+    </c:forEach>    
 </div>

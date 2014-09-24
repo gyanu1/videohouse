@@ -5,7 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="video-container" >
-	<video id="video" style="width:900;margin:0 auto;" controls >
+	<video id="video" style="width:900;margin:0 auto;"  poster="resources/img/${video.id}.${video.imageType}" controls >
             <c:choose>
                 <c:when test="${video.type =='ogv'}">
                       <source src="resources/video/${video.id}.${video.type}" type="video/ogg">

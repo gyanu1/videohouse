@@ -19,12 +19,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  *
  * @author GMaharjan
  */
 @Controller
+@SessionAttributes("loginUser")
 public class UserController {
 
     @Resource
@@ -52,7 +54,9 @@ public class UserController {
         return "registration";
     }
 
+    
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+ 
     public String checkUserLogin(@Valid User user, BindingResult result, Model model) {
         String view = "login";
         if (result.hasErrors()) {
@@ -60,14 +64,14 @@ public class UserController {
                 System.out.println("Result has error");
                 return view;
             }
-            User user_actual;
-            user_actual = userService.getUser(user.getEmail());
+            User user_actual = userService.getUser(user.getEmail());
             if (user_actual == null) {
                 System.out.println("No such User!!");
                 return view;
             }
             if (BCrypt.checkpw(user.getPassword(), user_actual.getPassword())) {
                 System.out.println("redirect to video page");
+                model.addAttribute("loginUser", user_actual.getFirstName()+" "+user_actual.getLastName() );
                 view = "redirect:/search";
             } else {
                 System.out.println("redirect to login page");

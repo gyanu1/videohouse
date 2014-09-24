@@ -49,8 +49,10 @@ public class Video {
     @Column(name = "thumbnail", columnDefinition = "longblob")
     private byte[] thumbnail;
     @Transient
+  //  @Image
     private MultipartFile image;
     @Transient
+   // @ValidVideo
     private MultipartFile file;
 
     public MultipartFile getImage() {

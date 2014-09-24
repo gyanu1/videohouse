@@ -8,10 +8,8 @@ package cs544.videohouse.controller;
 import cs544.videohouse.domain.User;
 import cs544.videohouse.domain.Video;
 import cs544.videohouse.service.VideoService;
-import cs544.videohouse.util.Utility;
 import java.util.List;
 import javax.validation.Valid;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -94,30 +91,4 @@ public class UserController {
         System.out.println("redirect to video page");
         return "search";
     }
-
-    @RequestMapping(value = "/upload", method = RequestMethod.GET)
-    public ModelAndView uploadVideo() {
-        return new ModelAndView("upload", "command", new Video());
-    }
-
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public ModelAndView checkUloadVideo(@Valid Video video, BindingResult result, @RequestParam("file") MultipartFile file, @RequestParam("image") MultipartFile image) {
-        String videoExt = FilenameUtils.getExtension(video.getFile().getOriginalFilename());
-        System.out.println("extension : " + videoExt);
-        video.setType(videoExt);
-        String imageExt = FilenameUtils.getExtension(video.getImage().getOriginalFilename());
-        System.out.println("extension : " + videoExt);
-        video.setType(videoExt);
-        video.setImageType(imageExt);
-        video.setDate(Utility.getCurrentDate());
-        if (result.hasErrors()) {
-            return new ModelAndView("upload", "command", video);
-        } else {
-            videoService.uploadVideo(video);
-            // save file;
-            System.out.println("save");
-            return new ModelAndView("upload", "command", new Video());
-        }
-    }
-
 }

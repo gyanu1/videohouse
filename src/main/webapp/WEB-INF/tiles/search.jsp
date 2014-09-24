@@ -4,7 +4,7 @@
         <div class="video-block">
             <a href="video?id=${video.id}">
                 <img alt="" width="449" height="235" src="resources/img/${video.id}.${video.imageType}">
-                <p>${video.title}</p>
+                <p>${video.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${video.viewCount}&nbsp;views</p>
             </a>
         </div>
     </c:forEach>
